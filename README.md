@@ -1,2 +1,1 @@
-# Catan
-Joel and Caleb's Catan project repository
+Some generic README stuff... I dunno. 
