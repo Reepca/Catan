@@ -1,5 +1,6 @@
 void setup()
 {
+  int i = 0;
   size(800, 600);
 }
 
