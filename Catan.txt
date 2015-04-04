@@ -1,0 +1,92 @@
+CL@$$E$:
+
+Node
+Node is going to be anything you can build on - segments or points.
+
+Segment
+Segment is going to extend Node. Each Segment encapsulates two BoardPoints
+
+Road
+Road extends segment
+
+BoardPoint
+BoardPoint extends Node as well, and encapsulates one PointStruct, and references to the Tile(s) it is on, and a Port object that may be null
+
+Settlement
+Settlement implements PointStruct
+
+City
+City implements PointStruct
+
+Tile
+Tile is a tile on the board and knows its resource, its number, and has references to all Nodes it is associated with.
+
+Knight
+Knight implements DevelopmentCard
+
+YearOfPlenty
+YearOfPlenty implements DevelopmentCard
+
+RoadBuilding
+RoadBuilding implements DevelopmentCard
+
+Monopoly
+Monopoly implements DevelopmentCard
+
+Library
+Library implements DevelopmentCard
+
+University
+University implements DevelopmentCard
+
+Player
+Represents a player in the game - contains resource counts, victory points, ArrayList of references to the player’s built roads, ArrayList of references to the player’s development cards
+resource counts: ArrayList<Integer> //How many resource cards this player has
+victory points:  int //How many victory points this player has
+roads: ArrayList<Road> //contains references to each Road the player has played
+development cards: ArrayList<DevelopmentCard> /* contains references to each development card the player has, both played and unplayed (in the case of knights) */
+Methods: int longestRoadCount()
+
+Thief
+Contains a reference to the tile it is currently on. When the die is rolled in the main game loop, it will check to see if the tile the thief points to is the same as the tile whose PointStructs are being iterated through.
+
+Interfaces
+
+DevelopmentCard
+methods: void displayCard(), void playCard(Player whoPlayedThis)
+
+PointStruct
+PointStruct is an interface with a getResourceFactor method and a getOwner() method
+
+Clickable
+methods:boolean isMouseOver()
+
+interface PointStruct
+{
+	float getResourceFactor();
+	Player getOwner();
+}
+
+class Settlement implements PointStruct
+{
+	static final float RESOURCE_FACTOR = 1.0;
+	Player settlementOwner;
+	
+	float getResourceFactor()
+	{
+		return RESOURCE_FACTOR;
+	}
+	
+}
+
+void mousePressed()
+{
+	
+}
+
+DETERMINING LONGEST ROAD:
+For each player, look at a road of theirs and check for connected roads. Follow the roads until no new roads are connected. Sum up all connected roads. This is the tentative longest road. Repeat the process with each road until all are checked, and select the longest one. THIS IS THE PLAYER’S LONGEST ROAD. Do that for each player, compare roads, pick the player with the longest one.
+
+FOLLOW THE ROADS: 
+-Start with a road
+
