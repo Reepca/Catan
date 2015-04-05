@@ -1,0 +1,3 @@
+class RoadBuilding implements DevelopmentCard
+{
+}

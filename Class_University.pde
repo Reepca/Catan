@@ -1,0 +1,3 @@
+class University implements DevelopmentCard
+{
+}

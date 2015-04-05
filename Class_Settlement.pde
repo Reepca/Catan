@@ -1,0 +1,3 @@
+class Settlement implements PointStruct
+{
+}
