@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="401.07999"
+   height="347.50226"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="catbrick.svg">
+   sodipodi:docname="catsheep.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.45160921"
-     inkscape:cx="446.83341"
-     inkscape:cy="399.1701"
+     inkscape:zoom="0.5"
+     inkscape:cx="171.78"
+     inkscape:cy="-3.8109465"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,7 +35,11 @@
      inkscape:window-height="852"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -51,10 +55,10 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-185.46001,-294.62247)">
     <g
-       id="g5083"
-       transform="translate(-17.71443,-22.143038)">
+       id="g4472">
       <path
          transform="translate(42,-50)"
          d="M 544.03999,518.36218 444.02,691.6019 l -200.04,0 L 143.96001,518.36218 243.98,345.12247 l 200.04,0 z"
@@ -69,7 +73,7 @@
          sodipodi:cx="344"
          sodipodi:sides="6"
          id="path4300"
-         style="fill:#552200;fill-opacity:1;stroke:#333333"
+         style="fill:#57ca23;fill-opacity:1;stroke:#333333"
          sodipodi:type="star" />
       <path
          transform="translate(276,260)"
@@ -85,7 +89,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
       <path
          transform="translate(408,260)"
@@ -101,7 +105,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306-0"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
       <path
          transform="translate(212,374)"
@@ -117,7 +121,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306-2"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
       <path
          transform="translate(344,372)"
@@ -133,7 +137,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306-5"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
       <path
          transform="translate(474,374)"
@@ -149,7 +153,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306-4"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
       <path
          transform="translate(278,488)"
@@ -165,7 +169,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306-58"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
       <path
          transform="translate(410,490)"
@@ -181,7 +185,7 @@
          sodipodi:cx="42"
          sodipodi:sides="6"
          id="path4306-8"
-         style="fill:#782121;fill-opacity:1;stroke:#782121;stroke-opacity:1"
+         style="fill:#71ff00;fill-opacity:1;stroke:#4bf58b;stroke-opacity:1"
          sodipodi:type="star" />
     </g>
   </g>
