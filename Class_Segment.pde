@@ -21,7 +21,7 @@ class Segment extends Node
     parallelTop = new RLine(segment.getSlope(), segment.getYIntercept() + yInterceptDisplacement);
     parallelBot = new RLine(segment.getSlope(), segment.getYIntercept() - yInterceptDisplacement);
     perpLeft = new RLine(perpSlope, (float)(pointA.getVisualLocation().y - segment.getSlope() * pointA.getVisualLocation().x));
-    perpRight = new RLine(perpSlope, (float)(pointB.getVisualLocation().y - segment.getSlope() * pointB.getVisualLocation().x);
+    perpRight = new RLine(perpSlope, (float)(pointB.getVisualLocation().y - segment.getSlope() * pointB.getVisualLocation().x));
   }
   
   private void assignHorizontalExtremes(BoardPoint pointA, BoardPoint pointB)
