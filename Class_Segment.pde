@@ -12,16 +12,23 @@ class Segment extends Node
   
   Segment(BoardPoint pointA, BoardPoint pointB)
   {
+    //Remember the parameters
     this.pointA = pointA;
     this.pointB = pointB;
+    //Set references to which points are lowest and highest in each dimension
     assignExtremes();
+    //initialize a line that represents the geometry of this segment
     segment = new RLine(pointA.getVisualLocation(), pointB.getVisualLocation());
+    //find the slope of a line perpendicular to this segment
     perpSlope = -(pow(segment.getSlope(), -1));
+    //determine, based on the perpendicular displacement (segmentThickness), how much the parallel lines need to be vertically displaced.
     yInterceptDisplacement = abs(segmentThickness * sin(atan(perpSlope)));
-    parallelTop = new RLine(segment.getSlope(), segment.getYIntercept() + yInterceptDisplacement);
-    parallelBot = new RLine(segment.getSlope(), segment.getYIntercept() - yInterceptDisplacement);
-    perpLeft = new RLine(perpSlope, (float)(pointA.getVisualLocation().y - segment.getSlope() * pointA.getVisualLocation().x));
-    perpRight = new RLine(perpSlope, (float)(pointB.getVisualLocation().y - segment.getSlope() * pointB.getVisualLocation().x);
+    //Displace (and create) the parallel lines accordingly
+    parallelTop = new RLine(segment.getSlope(), segment.getYIntercept() + yInterceptDisplacement); //visually lower in processing
+    parallelBot = new RLine(segment.getSlope(), segment.getYIntercept() - yInterceptDisplacement); //visually higher in processing
+    //create lines perpendicular to the endpoints 
+    perpLeft = new RLine(perpSlope, (float)(left.y - segment.getSlope() * left.x));
+    perpRight = new RLine(perpSlope, (float)(right.y - segment.getSlope() * right.x);
   }
   
   private void assignHorizontalExtremes(BoardPoint pointA, BoardPoint pointB)
@@ -54,8 +61,8 @@ class Segment extends Node
   
   private void assignExtremes(BoardPoint pointA, BoardPoint pointB)
   {
-    assignHorizontalExtremes();
-    assignVerticalExtremes();
+    assignHorizontalExtremes(pointA, pointB);
+    assignVerticalExtremes(pointA, pointB);
   }
   
   boolean containsPoint(Point testPoint)
