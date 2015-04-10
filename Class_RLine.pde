@@ -5,34 +5,38 @@ class RLine
  float xValue; //An arbitrary x-point at which the line exists 
  Point endPointA;
  Point endPointB;
- boolean undefined;
  
  RLine(float slope, float yIntercept, float xValue)
  {
    this.slope = slope;
    this.yIntercept = yIntercept;
-   undefined = (slope != slope);
+   if(slope != slope)
+   {
+     this.slope = Integer.MAX_VALUE;
+   }
    this.xValue = xValue;
  }
  
  
  RLine(Point endPointA, Point endPointB)
  {
-   slope = ((float)endPointA.y - (float)endPointB.y) / ((float)endPointA.x - (float)endPointB.x);
+   if(((float)endPointA.x - (float)endPointB.x) == 0)
+   {
+     this.slope = Integer.MAX_VALUE;
+   }
+   else
+   {
+     this.slope = ((float)endPointA.y - (float)endPointB.y) / ((float)endPointA.x - (float)endPointB.x);
+   }
    yIntercept = (float)endPointA.y - (slope * (float)endPointA.x); 
    this.endPointA = endPointA;
    this.endPointB = endPointB;
-   undefined = (slope != slope);
  }
  
  
  boolean greaterThan(Point testPoint)
  {
-   if(!undefined)
-   {
-     return ((float)testPoint.y > (slope * (float)testPoint.x) - yIntercept);
-   }
-   return (testPoint.);
+   return ((float)testPoint.y > (slope * (float)testPoint.x) - yIntercept);
  }
  
  
