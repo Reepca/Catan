@@ -3,6 +3,11 @@ class BoardPoint extends Node
   static final int BOARDPOINT_CLICK_PRIORITY = 2;
   Point visualLocation;
   static int BOARDPOINT_CLICK_RADIUS = 20;
+  
+  BoardPoint()
+  {
+  }
+  
   boolean containsPoint(Point testPoint)
   {
     return ((sq(visualLocation.x - testPoint.x) + sq(visualLocation.y - testPoint.y)) < sq(BOARDPOINT_CLICK_RADIUS));

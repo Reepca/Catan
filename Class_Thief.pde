@@ -1,3 +1,9 @@
 class Thief
 {
+  
+  Thief()
+  {
+    
+  }
+  
 }

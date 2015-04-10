@@ -31,7 +31,7 @@ class RLine
  
  boolean greaterThan(Point testPoint)
  {
-     return ((float)testPoint.y > (slope * (float)testPoint.x) - yIntercept);
+   return ((float)testPoint.y > (slope * (float)testPoint.x) - yIntercept);
  }
  
  

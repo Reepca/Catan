@@ -1,3 +1,9 @@
 class Player
 {
+  
+  Player()
+  {
+    
+  }
+  
 }
