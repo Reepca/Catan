@@ -1,9 +1,8 @@
 abstract class Node implements Clickable
 {
-  
-  Node()
+  Point visualCenter;
+  Node(Point visualCenter)
   {
-    
+    this.visualCenter = visualCenter;
   }
-  
 }

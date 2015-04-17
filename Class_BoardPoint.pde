@@ -1,16 +1,15 @@
 class BoardPoint extends Node
 {
   static final int BOARDPOINT_CLICK_PRIORITY = 2;
-  Point visualLocation;
-  static int BOARDPOINT_CLICK_RADIUS = 20;
-  
-  BoardPoint()
+  PointStruct placedOnThis = null;
+  BoardPoint(Point visualCenter)
   {
+    super(visualCenter);
   }
   
   boolean containsPoint(Point testPoint)
   {
-    return ((sq(visualLocation.x - testPoint.x) + sq(visualLocation.y - testPoint.y)) < sq(BOARDPOINT_CLICK_RADIUS));
+    return ((sq(visualCenter.x - testPoint.x) + sq(visualCenter.y - testPoint.y)) < sq(BOARDPOINT_CLICK_RADIUS));
   }
   
   int getClickPriority()
@@ -20,6 +19,11 @@ class BoardPoint extends Node
   
   Point getVisualLocation()
   {
-    return visualLocation;
+    return visualCenter;
+  }
+  
+  int compareTo(Clickable other)
+  {
+    return this.getClickPriority() - other.getClickPriority();
   }
 }

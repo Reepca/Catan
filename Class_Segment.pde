@@ -3,20 +3,19 @@ class Segment extends Node
   static final int SEGMENT_CLICK_PRIORITY = 1;
   BoardPoint pointA;
   BoardPoint pointB;
-  static int segmentThickness = 10;
   float yInterceptDisplacement;
   float perpSlope;
   RLine segment;
   RLine parallelTop, parallelBot, perpLeft, perpRight;
   Point top, left, bottom, right;
+  Road builtOnThisSegment = null;
   
   Segment(BoardPoint pointA, BoardPoint pointB)
   {
+    super(new Point((pointA.getVisualLocation().x + pointB.getVisualLocation().x) / 2, (pointA.getVisualLocation().y + pointB.getVisualLocation().y) / 2));
     //Remember the parameters
     this.pointA = pointA;
     this.pointB = pointB;
-    //Set references to which points are lowest and highest in each dimension
-    assignExtremes();
     //initialize a line that represents the geometry of this segment
     segment = new RLine(pointA.getVisualLocation(), pointB.getVisualLocation());
     //find the slope of a line perpendicular to this segment
@@ -27,8 +26,8 @@ class Segment extends Node
     parallelTop = new RLine(segment.getSlope(), segment.getYIntercept() + yInterceptDisplacement); //visually lower in processing
     parallelBot = new RLine(segment.getSlope(), segment.getYIntercept() - yInterceptDisplacement); //visually higher in processing
     //create lines perpendicular to the endpoints 
-    perpLeft = new RLine(perpSlope, (float)(left.y - segment.getSlope() * left.x));
-    perpRight = new RLine(perpSlope, (float)(right.y - segment.getSlope() * right.x);
+    perpA = segment.getPerpLine(pointA.getVisualLocation());
+    perpB = segment.getPerpLine(pointB.getVisualLocation());
   }
   
   private void assignHorizontalExtremes(BoardPoint pointA, BoardPoint pointB)
@@ -42,6 +41,19 @@ class Segment extends Node
     {
       right = pointA.getVisualLocation();
       left = pointB.getVisualLocation();
+    }
+  }
+  
+  void placeRoad(Road toPlace)
+  {
+    if(builtOnThisSegment != null)
+    {
+      this.builtOnThisSegment = toPlace;
+    }
+    
+    else
+    {
+      println("error: attempted to build a road on a Segment that already has a road");
     }
   }
   
@@ -73,5 +85,10 @@ class Segment extends Node
   int getClickPriority()
   {
     return SEGMENT_CLICK_PRIORITY;
+  }
+  
+  int compareTo(Clickable other)
+  {
+    return this.getClickPriority() - other.getClickPriority();
   }
 }
