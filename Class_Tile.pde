@@ -4,23 +4,29 @@ class Tile extends Node
   int tileID;
   Tile(int tileID, Point location)
   {
+    super(location);
     this.tileID = tileID;
   }
   
   boolean containsPoint(Point testPoint)
   {
-    
+    return true;
   }
 
   
   void drawTile(int xcoord, int ycoord, int tileWidth, int tileHeight)
   {
-    shape(tile, xcoord, ycoord, tileWidth, tileHeight);
+    shape(tileShapes[tileID], visualCenter.x, visualCenter.y, tileWidth, tileHeight);
   }
   
   
   int getClickPriority()
   {
     return TILE_CLICK_PRIORITY;
+  }
+  
+  int compareTo(Clickable other)
+  {
+    return this.getClickPriority() - other.getClickPriority();
   }
 }

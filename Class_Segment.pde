@@ -5,8 +5,8 @@ class Segment extends Node
   BoardPoint pointB;
   float yInterceptDisplacement;
   float perpSlope;
-  RLine segment;
-  RLine parallelTop, parallelBot, perpLeft, perpRight;
+  RLine segmentLine;
+  RLine parallelA, parallelB, perpA, perpB;
   Point top, left, bottom, right;
   Road builtOnThisSegment = null;
   
@@ -17,31 +17,10 @@ class Segment extends Node
     this.pointA = pointA;
     this.pointB = pointB;
     //initialize a line that represents the geometry of this segment
-    segment = new RLine(pointA.getVisualLocation(), pointB.getVisualLocation());
-    //find the slope of a line perpendicular to this segment
-    perpSlope = -(pow(segment.getSlope(), -1));
-    //determine, based on the perpendicular displacement (segmentThickness), how much the parallel lines need to be vertically displaced.
-    yInterceptDisplacement = abs(segmentThickness * sin(atan(perpSlope)));
-    //Displace (and create) the parallel lines accordingly
-    parallelTop = new RLine(segment.getSlope(), segment.getYIntercept() + yInterceptDisplacement); //visually lower in processing
-    parallelBot = new RLine(segment.getSlope(), segment.getYIntercept() - yInterceptDisplacement); //visually higher in processing
-    //create lines perpendicular to the endpoints 
-    perpA = segment.getPerpLine(pointA.getVisualLocation());
-    perpB = segment.getPerpLine(pointB.getVisualLocation());
-  }
-  
-  private void assignHorizontalExtremes(BoardPoint pointA, BoardPoint pointB)
-  {
-    if(pointA.getVisualLocation().x < pointB.getVisualLocation().x)
-    {
-      right = pointB.getVisualLocation();
-      left = pointA.getVisualLocation();
-    } 
-    else
-    {
-      right = pointA.getVisualLocation();
-      left = pointB.getVisualLocation();
-    }
+    segmentLine = new RLine(pointA.getVisualLocation(), pointB.getVisualLocation());
+    perpA = segmentLine.getPerpLine(pointA.getVisualLocation());
+    perpB = segmentLine.getPerpLine(pointB.getVisualLocation());
+    parallelA = segmentLine.getDisplacedParallelLine((float)segmentThickness);
   }
   
   void placeRoad(Road toPlace)
@@ -57,29 +36,16 @@ class Segment extends Node
     }
   }
   
-  private void assignVerticalExtremes(BoardPoint pointA, BoardPoint pointB)
-  {
-    if(pointA.getVisualLocation().y < pointB.getVisualLocation().y)
-    {
-      bottom = pointB.getVisualLocation();
-      top = pointA.getVisualLocation();
-    } 
-    else
-    {
-      bottom = pointA.getVisualLocation();
-      top = pointB.getVisualLocation();
-    }
-  }
-  
-  private void assignExtremes(BoardPoint pointA, BoardPoint pointB)
-  {
-    assignHorizontalExtremes(pointA, pointB);
-    assignVerticalExtremes(pointA, pointB);
-  }
-  
   boolean containsPoint(Point testPoint)
   {
-    
+    if(perpA.greaterThan(testPoint) == perpA.greaterThan(visualCenter) && perpB.greaterThan(testPoint) == perpB.greaterThan(visualCenter))
+    {
+      if(parallelA.greaterThan(testPoint) == parallelA.greaterThan(visualCenter) && parallelB.greaterThan(testPoint) == parallelB.greaterThan(visualCenter))
+      {
+        return true;
+      }
+    }
+    return false;
   }
   
   int getClickPriority()

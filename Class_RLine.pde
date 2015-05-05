@@ -5,9 +5,9 @@ class RLine
   //y-intercept = C/B
   //x-intercept = C/A
   //slope = rise / run, rise / run = -A / B, rise = -A, run = B
- float A;
- float B;
- float C;
+ public float A;
+ public float B;
+ public float C;
  private float slope;
  
  RLine(float A, float B, float C)
@@ -61,6 +61,38 @@ class RLine
  RLine getDisplacedParallelLine(float displacement)
  {
     RLine perpLine = getPerpLine();
+    //The slope of the perpendicular line and the x-and-y components of the displacement form a similar triangle.
+    float slopeHyp = sqrt(sq(perpLine.A) + sq(perpLine.B));
+    float xIntDisplace = signOf(displacement) * (displacement/slopeHyp * perpLine.A);
+    float yIntDisplace = signOf(displacement) * (displacement/slopeHyp * perpLine.B);
+    RLine parallelLine = this.clone();
+    parallelLine.displaceLine(xIntDisplace, yIntDisplace);
+    return parallelLine;
+ }
+ 
+ RLine clone()
+ {
+   return new RLine(A, B, C);
+ }
+ 
+ private float signOf(float x)
+ {
+   return x / abs(x);
+ }
+ 
+ void displaceLine(float xDisplace, float yDisplace)
+ {
+   if(xDisplace != 0)
+   {
+     //x-intercept = C / A
+     //so if I want to change the x-intercept by a certain amount... I must change C by an amount that takes into account A.
+     //for example, if A = 3, and I want to increase the x-intercept by 5, then, since x-intercept = C / A, I would need to increase C
+     //by 15, or displace*A. The same goes for y-intercept, only with B.
+     C += xDisplace * A;
+   }else
+   {
+     C += yDisplace * B;
+   }
  }
  
  /*
@@ -79,7 +111,7 @@ class RLine
  What is C?
  A: negative RISE
  B: RUN
- C: 
+ C: All I can say is "the position variable"... it defines the x and y intercepts implicitly.
  
  */
  
