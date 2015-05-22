@@ -17,10 +17,18 @@ static
 {
   setCosts();
 }
+
+RLine testLine = new RLine(new Point(200, 200), new Point(400, 400));
+RLine perpA = testLine.getPerpLine(new Point(400, 400));
+RLine perpB = testLine.getPerpLine(new Point(200, 200));
+RLine parallelA = testLine.getDisplacedParallelLine(20.0f);
+RLine parallelB = testLine.getDisplacedParallelLine(-20.0f);
+int clickCount = 0;
 void setup()
 {
   size(800, 600);
   loadShapes();
+  line(200, 200, 400, 400);
 }
 
 void draw()
@@ -29,6 +37,21 @@ void draw()
 
 void mousePressed()
 {
+  Point testPoint = new Point(mouseX, mouseY);
+  Point visualCenter = new Point(300, 300);
+  //if testPoint and visualCenter are on the same side of perpA and perpB
+  if(perpA.greaterThan(testPoint) == perpA.greaterThan(visualCenter) && perpB.greaterThan(testPoint) == perpB.greaterThan(visualCenter))
+    {
+      println("entered first if statement" + random(2));
+      //if testPoint and visualCenter are on the same side of parallelA and parallelB
+      println("parallel A = " + (parallelA.greaterThan(testPoint) == parallelA.greaterThan(visualCenter)));
+        println("parallel B = " + (parallelB.greaterThan(testPoint) == parallelB.greaterThan(visualCenter)));
+      if(parallelA.greaterThan(testPoint) == parallelA.greaterThan(visualCenter) && parallelB.greaterThan(testPoint) == parallelB.greaterThan(visualCenter))
+      {
+        
+        println("SEGMENT WAS CLICKED!!" + (++clickCount) + " times!!!");
+      }
+    }
 }
 
 void keyPressed()

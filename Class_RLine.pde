@@ -30,6 +30,8 @@ class RLine
  
  boolean greaterThan(Point testPoint)
  {
+   //Ax + By = C
+   //-A / B = slope
    return (((float)testPoint.x * A + (float)testPoint.y * B) > C);
  }
  
@@ -63,8 +65,8 @@ class RLine
     RLine perpLine = getPerpLine();
     //The slope of the perpendicular line and the x-and-y components of the displacement form a similar triangle.
     float slopeHyp = sqrt(sq(perpLine.A) + sq(perpLine.B));
-    float xIntDisplace = signOf(displacement) * (displacement/slopeHyp * perpLine.A);
-    float yIntDisplace = signOf(displacement) * (displacement/slopeHyp * perpLine.B);
+    float xIntDisplace = signOf(displacement) * abs(displacement/slopeHyp * perpLine.A);
+    float yIntDisplace = signOf(displacement) * abs(displacement/slopeHyp * perpLine.B);
     RLine parallelLine = this.clone();
     parallelLine.displaceLine(xIntDisplace, yIntDisplace);
     return parallelLine;
@@ -77,6 +79,7 @@ class RLine
  
  private float signOf(float x)
  {
+   //returns 1 if positive, returns -1 if negative
    return x / abs(x);
  }
  
