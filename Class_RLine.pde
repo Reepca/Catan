@@ -21,6 +21,8 @@ class RLine
  
  RLine(Point endPointA, Point endPointB)
  {
+   //issue occurs when pointB is farther to left AND lower y-coordinate OR pointB is farther to right AND higher y-coordinate
+   //So when A is negative AND B is positive OR when A is positive AND B is negative
    A = -((float)endPointA.y - (float)endPointB.y);
    B = ((float)endPointA.x - (float)endPointB.x);
    C = (float)endPointA.x * A + (float)endPointA.y * B;
@@ -63,10 +65,27 @@ class RLine
  RLine getDisplacedParallelLine(float displacement)
  {
     RLine perpLine = getPerpLine();
-    //The slope of the perpendicular line and the x-and-y components of the displacement form a similar triangle.
+    /*
+    The slope of the perpendicular line (known) and the x-and-y components (unknown, xIntDisplace and yIntDisplace) of a certain length of 
+    line (displacement, known) 
+    form a similar triangle.
+    To solve for the unknown, we only need to use the ratio of the hypotenuse to a certain component as a proportionality variable
+    (the values shown below are equivalent to secant and cosecant, respectively)
+    */
     float slopeHyp = sqrt(sq(perpLine.A) + sq(perpLine.B));
-    float xIntDisplace = signOf(displacement) * abs(displacement/slopeHyp * perpLine.A);
-    float yIntDisplace = signOf(displacement) * abs(displacement/slopeHyp * perpLine.B);
+    println("A = " + A + " B = " + B + " C = " + C);
+    println("slopeHyp = " + slopeHyp);
+    float hypOverDX = slopeHyp / perpLine.B;
+    println("hypOverDX = " + hypOverDX);
+    float hypOverDY = slopeHyp / perpLine.A;
+    println("hypOverDY = " + hypOverDY);
+    //abs guarantees that lines with positive vs negative displacement will be on the opposite side of the original line
+    //float xIntDisplace = signOf(displacement) * abs(displacement / hypOverDX);
+    //float yIntDisplace = signOf(displacement) * abs(displacement / hypOverDY);
+    float xIntDisplace = signOf(displacement) * abs(displacement / hypOverDX);
+    float yIntDisplace = signOf(displacement) * abs(displacement / hypOverDY);
+    println("xIntDisplace = " + xIntDisplace + ", yIntDisplace = " + yIntDisplace);
+    //make a copy of this line, move it the calculated amount, return it.
     RLine parallelLine = this.clone();
     parallelLine.displaceLine(xIntDisplace, yIntDisplace);
     return parallelLine;
@@ -84,18 +103,47 @@ class RLine
  }
  
  void displaceLine(float xDisplace, float yDisplace)
- {
-   if(xDisplace != 0)
+ { 
+   //NOTE: CURRENTLY THIS METHOD EXPECTS xDisplace AND yDisplace TO HAVE THE SAME SIGN.
+   //x-intercept = C / A
+   //so if I want to change the x-intercept by a certain amount... I must change C by an amount that takes into account A.
+   //for example, if A = 3, and I want to increase the x-intercept by 5, then, since x-intercept = C / A, I would need to increase C
+   //by 15, or displace*A. The same goes for y-intercept, only with B.
+     
+   //x-intercept = C/A
+   //x-intercept + change = C/A + change
+   //x-intercept + change = C/A + changeA/A
+   //x-intercept + change = (C + (change * A)) / A
+   
+   float cDisplace = signOf(xDisplace) * abs(xDisplace * A); //signOf() and abs() are used to guarantee that both xDisplace and yDisplace
+                                                           //have the same sign.
+   if(cDisplace == cDisplace) //NaN test
    {
-     //x-intercept = C / A
-     //so if I want to change the x-intercept by a certain amount... I must change C by an amount that takes into account A.
-     //for example, if A = 3, and I want to increase the x-intercept by 5, then, since x-intercept = C / A, I would need to increase C
-     //by 15, or displace*A. The same goes for y-intercept, only with B.
-     C += xDisplace * A;
-   }else
-   {
-     C += yDisplace * B;
+     C += cDisplace;
+     println("C incremented by " + cDisplace + " based on xDisplace");
    }
+   
+   cDisplace = signOf(yDisplace) * abs(yDisplace * B);
+   if(cDisplace == cDisplace) //NaN test
+   {
+     C += cDisplace; 
+     println("C incremented by " + cDisplace + " based on yDisplace");
+   }
+ }
+ 
+ void drawSelf()
+ {
+   //Ax + By = C
+   //x = -B/Ay + C/A
+   //y = -A/Bx + C/B
+   Point drawPointA = new Point(0, int(C/B));
+   Point drawPointB = new Point(width, int(-A/B * width + C/B));
+   if(B ==0)
+   {
+     drawPointA = new Point(int(C/A), 0);
+     drawPointB = new Point(int(C/A), height);
+   }
+   line(drawPointA.x, drawPointA.y, drawPointB.x, drawPointB.y);
  }
  
  /*

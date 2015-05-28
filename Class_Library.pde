@@ -6,4 +6,8 @@ class Library implements DevelopmentCard
     
   }
   
+  void playCard(Player cardPlayer)
+  {
+    
+  }
 }

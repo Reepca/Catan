@@ -6,4 +6,8 @@ class Knight implements DevelopmentCard
     
   }
   
+  void playCard(Player cardPlayer)
+  {
+    
+  }
 }

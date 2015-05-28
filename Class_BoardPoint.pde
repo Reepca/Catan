@@ -2,9 +2,11 @@ class BoardPoint extends Node
 {
   static final int BOARDPOINT_CLICK_PRIORITY = 2;
   PointStruct placedOnThis = null;
-  BoardPoint(Point visualCenter)
+  Segment[] attachedSegments;
+  BoardPoint(Point visualCenter, Segment[] attachedSegments)
   {
     super(visualCenter);
+    this.attachedSegments = attachedSegments;
   }
   
   boolean containsPoint(Point testPoint)

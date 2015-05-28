@@ -6,4 +6,8 @@ class RoadBuilding implements DevelopmentCard
     
   }
   
+  void playCard(Player cardPlayer)
+  {
+    
+  }
 }
