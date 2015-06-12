@@ -36,10 +36,15 @@ class Player
     
     if(sufficientResources)
     {
-      builtRoads.add(new Road(this, buildOn));
-      for(int i = 0; i < roadCost.length; i++)
+      if(buildOn.placeRoad(new Road(this, buildOn)))
       {
-        resourceCounts[i] -= roadCost[i];
+        builtRoads.add(buildOn.getStructure());
+      
+        for(int i = 0; i < roadCost.length; i++)
+        {
+          resourceCounts[i] -= roadCost[i];
+        }
+        updateLongestRoad();
       }
     }
     

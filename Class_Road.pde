@@ -6,7 +6,6 @@ class Road
   {
     this.owner = owner;
     this.builtOnThis = builtOnThis;
-    builtOnThis.placeRoad(this);
   }
   
 }

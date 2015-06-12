@@ -21,18 +21,21 @@ class Segment extends Node
     perpA = segmentLine.getPerpLine(pointA.getVisualLocation());
     perpB = segmentLine.getPerpLine(pointB.getVisualLocation());
     parallelA = segmentLine.getDisplacedParallelLine((float)segmentThickness);
+    parallelB = segmentLine.getDisplacedParallelLine((float)-segmentThickness);
   }
   
-  void placeRoad(Road toPlace)
+  boolean placeRoad(Road toPlace) // returns true if a road was successfully placed
   {
     if(builtOnThisSegment != null)
     {
       this.builtOnThisSegment = toPlace;
+      return true;
     }
     
     else
     {
       println("error: attempted to build a road on a Segment that already has a road");
+      return false;
     }
   }
   
@@ -56,5 +59,10 @@ class Segment extends Node
   int compareTo(Clickable other)
   {
     return this.getClickPriority() - other.getClickPriority();
+  }
+  
+  Road getStructure()
+  {
+    return builtOnThisSegment;
   }
 }
