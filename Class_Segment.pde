@@ -8,6 +8,7 @@ class Segment extends Node
   RLine segmentLine;
   RLine parallelA, parallelB, perpA, perpB;
   Point top, left, bottom, right;
+  Tile tileA, tileB;
   Road builtOnThisSegment = null;
   
   Segment(BoardPoint pointA, BoardPoint pointB)
@@ -64,5 +65,36 @@ class Segment extends Node
   Road getStructure()
   {
     return builtOnThisSegment;
+  }
+  /*
+   *reflectTile: creates a new Tile that is on the opposite side of this segment, across from whichever Tile already exists (A or B)
+   *if both Tiles already exist, nothing happens and an error message is printed. If neither Tile exists, an error message is printed.
+   *
+   */
+  Tile reflectTile(int newTileID)
+  {
+    if(tileA == null) // in this case, we want to have the new tile be stored in tileA
+    {
+      if(tileB != null) //make sure there is a valid tile to reflect across
+      {
+        //create a new Tile in tileA that is on the side of this Segment that tileB is not on.
+        
+        //return the new Tile
+      }else
+      {
+        println("error: neither Tile of this Segment exists, but reflectTile() was called");
+      }
+    }else //if tileA already exists 
+    {
+      if(tileB == null) //and tileB doesn't
+      {
+        //create a new Tile in tileB that is on the side of this Segment that tileB is not on
+        
+        //return the new Tile
+      }else // if tileA and tileB both already exist
+      {
+        println("error: called reflectTile() on a segment that already has two tiles");
+      }
+    }
   }
 }
